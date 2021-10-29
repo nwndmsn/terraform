@@ -28,3 +28,10 @@ resource "aws_instance" "sje_weba" {
     Name = "sje-weba"
   }
 }
+
+resource "aws_eip" "sdkim_web_eip" {
+  vpc = true
+  instance                    = aws_instance.sje_weba.id
+  associate_with_private_ip   = "10.0.0.11"
+  depends_on                  = [aws_internet_gateway.sje_ig]
+}
